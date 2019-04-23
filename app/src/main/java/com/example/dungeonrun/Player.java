@@ -84,4 +84,14 @@ public class Player implements Serializable {
     public int getSkillPoints(){
         return skillPoints;
     }
+
+    public void removeSkillPoint(){skillPoints--;}
+
+    public void gainATK(){playerATK++;}
+
+    public void gainDEX(){playerDex++;}
+
+    public void gainVIT(){playerVit++;}
+
+    public void gainHP(){maxHP+=5;}
 }

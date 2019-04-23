@@ -30,7 +30,7 @@ public class MainActivity extends AppCompatActivity {
         step.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ((TextView) findViewById(R.id.room)).setText(currentRoom.getRoomType());
+
                 currentRoom = checkRoom(currentRoom);
                 currentRoom.roomFunction(player);
                 checkPlayer();
@@ -88,17 +88,23 @@ public class MainActivity extends AppCompatActivity {
         ((TextView) findViewById(R.id.currentAttack)).setText(Double.toString(player.getATK()));
         ((TextView) findViewById(R.id.expBar)).setText(Double.toString(player.getXP()));
         ((TextView) findViewById(R.id.currentLevel)).setText(Double.toString(player.getLVL()));
-        ((TextView) findViewById(R.id.dungeonLevel)).setText(dungeonLevel);
+        ((TextView) findViewById(R.id.room)).setText(currentRoom.getRoomType());
+
         if (currentRoom.getRoomType().equals("Monster")) {
             ((TextView) findViewById(R.id.MonsterHealth)).setText(Double.toString(((MonsterRoom) currentRoom).getRoomMonster().getHP()));
+            ((TextView) findViewById(R.id.Monster)).setText("Monster Health");
         } else {
             ((TextView) findViewById(R.id.MonsterHealth)).setText("");
             ((TextView) findViewById(R.id.Monster)).setText("");
         }
-        ((TextView) findViewById(R.id.dungeonLevel)).setText(dungeonLevel);
+        ((TextView) findViewById(R.id.dungeonLevel)).setText(Integer.toString(dungeonLevel));
         //Change this to level up points later on
         if (player.getSkillPoints() > 0) {
-            findViewById(R.id.skillPoints).setBackgroundColor(getResources().getColor(R.color.colorGreen));
+            findViewById(R.id.levelUp).setBackgroundColor(getResources().getColor(R.color.colorGreen));
+        }
+        else
+        {
+            findViewById(R.id.levelUp).setBackgroundColor(getResources().getColor(R.color.colorRed));
         }
 
 
@@ -107,13 +113,14 @@ public class MainActivity extends AppCompatActivity {
 
     public Player setPlayer()
     {
-        Intent intent = getIntent();
-        Bundle extras = getIntent().getExtras();
-        String extraStr = extras.getString("Player");
-        Player player1 = new Player(1, 1, 0, 100);
-        if(intent != null)
-        {
 
+
+        Player player1 = new Player(1, 1, 0, 100);
+        if(getIntent() != null)
+        {
+            Intent intent = getIntent();
+            Bundle extras = getIntent().getExtras();
+            String extraStr = extras.getString("Player");
             player1 = (Player)intent.getSerializableExtra("Player");
 
 
