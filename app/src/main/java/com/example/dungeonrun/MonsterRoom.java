@@ -9,7 +9,7 @@ public class MonsterRoom extends Room {
 	//Creates a new Monster for the player. Monster stats start at 10 hp, 1atk, and 10xp, and scale up based on the scaling variables
 	MonsterRoom(int level) {
 	    dungeonLevel = level;
-		roomMonster = new Monster(10+(hpScaling*dungeonLevel),1+(atkScaling*dungeonLevel),(10*Math.pow(xpScaling,dungeonLevel)));
+		roomMonster = new Monster(10+(hpScaling*dungeonLevel),1+(atkScaling*dungeonLevel),(1000*Math.pow(xpScaling,dungeonLevel)));
 		this.finished = false;
 	}
 

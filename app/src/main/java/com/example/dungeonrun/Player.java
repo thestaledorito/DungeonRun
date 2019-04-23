@@ -90,7 +90,16 @@ public class Player implements Serializable {
         return skillPoints;
     }
 
-    public void obtainItem(Equipment e){ inventory.add(e); }
+    public void removeSkillPoint(){skillPoints--;}
 
+    public void gainATK(){playerATK++;}
+
+    public void gainDEX(){playerDex++;}
+
+    public void gainVIT(){playerVit++;}
+
+    public void gainHP(){maxHP+=5;}
+
+    public void obtainItem(Equipment e){ inventory.add(e); }
 
 }
