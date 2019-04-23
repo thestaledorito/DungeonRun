@@ -7,12 +7,14 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
+
 import java.util.*;
 
 public class MainActivity extends AppCompatActivity {
 
 
-    Player player = setPlayer();
+    Player player;
 
     int dungeonLevel = 1;
 
@@ -21,7 +23,7 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-
+        player =   setPlayer();
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         display();
@@ -40,8 +42,10 @@ public class MainActivity extends AppCompatActivity {
         levelUp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent myIntent = new Intent(getApplicationContext(), levelUp.class);
-                myIntent.putExtra("Player", player);
+                Intent myIntent = new Intent(MainActivity.this, levelUp.class);
+                Bundle bundle = new Bundle();
+                bundle.putSerializable("P",player);
+                myIntent.putExtras(bundle);
                 startActivity(myIntent);
             }
         });
@@ -116,16 +120,21 @@ public class MainActivity extends AppCompatActivity {
 
 
         Player player1 = new Player(1, 1, 0, 100);
-        if(getIntent() != null)
-        {
-            Intent intent = getIntent();
+        Intent intent = getIntent();
+        if(intent != null) {
             Bundle extras = getIntent().getExtras();
-            String extraStr = extras.getString("Player");
-            player1 = (Player)intent.getSerializableExtra("Player");
 
 
+            if (extras != null) {
 
+                player1 = (Player)intent.getSerializableExtra("P");
+
+            } else if (extras == null) {
+                System.out.println("Null");
+
+            }
         }
+        System.out.println(intent.toString());
         return player1;
 
 

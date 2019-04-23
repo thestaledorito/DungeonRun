@@ -10,9 +10,10 @@ import android.widget.TextView;
 
 public class levelUp  extends AppCompatActivity {
 
-    Player player = setPlayer();
+    Player player;
 
     protected void onCreate(Bundle savedInstanceState) {
+        player = setPlayer();
 
         setContentView(R.layout.levelup);
         Button ATK = findViewById(R.id.atkUp);
@@ -70,8 +71,10 @@ public class levelUp  extends AppCompatActivity {
         goBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent myIntent = new Intent(getApplicationContext(), MainActivity.class);
-                myIntent.putExtra("Player", player);
+                Intent myIntent = new Intent(levelUp.this, MainActivity.class);
+                Bundle bundle = new Bundle();
+                bundle.putSerializable("P",player);
+                myIntent.putExtras(bundle);
                 startActivity(myIntent);
             }
         });
@@ -84,19 +87,28 @@ public class levelUp  extends AppCompatActivity {
 
 
         Player player1 = new Player(1, 1, 0, 100);
-        if(getIntent() != null)
-        {
-            Intent intent = getIntent();
-            intent.getStringExtra("Player");
-            player1 = (Player)intent.getSerializableExtra("Player");
+        Intent intent = getIntent();
+        if(intent != null) {
+            Bundle extras = getIntent().getExtras();
 
 
+            if (extras != null) {
 
+                player1 = (Player)intent.getSerializableExtra("P");
+
+            } else if (extras == null) {
+                System.out.println("Null");
+
+            }
         }
+        System.out.println(intent.toString());
         return player1;
 
 
     }
+
+
+
     public void display() {
         ((TextView) findViewById(R.id.healthText)).setText(Double.toString(player.getHP()));
         ((TextView) findViewById(R.id.atkText)).setText(Double.toString(player.getATK()));
