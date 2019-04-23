@@ -1,9 +1,11 @@
 package com.example.dungeonrun;
 
-import android.media.audiofx.DynamicsProcessing;
+
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Collections;
+
 
 public class Player implements Serializable {
     private int playerLVL;
@@ -15,7 +17,11 @@ public class Player implements Serializable {
     private boolean dead;
     private int playerVit;
     private int skillPoints;
-    private ArrayList<Equipment> inventory;
+    private ArrayList<Boots> bootsInv;
+    private ArrayList<Chestpiece> chestInv;
+    private ArrayList<Pants> pantsInv;
+    private ArrayList<Sword> swordInv;
+
 
     Player(int l, int atk, int xp, double hp){
         playerLVL = l;
@@ -23,8 +29,12 @@ public class Player implements Serializable {
         playerXP = xp;
         maxHP = hp;
         currentHP = hp;
-        inventory = new ArrayList<>();
+        bootsInv = new ArrayList<>();
+        chestInv = new ArrayList<>();
+        pantsInv = new ArrayList<>();
+        swordInv = new ArrayList<>();
     }
+
     public void gainLevel(){
         playerLVL++;
         skillPoints+=2;
@@ -100,6 +110,40 @@ public class Player implements Serializable {
 
     public void gainHP(){maxHP+=5;}
 
-    public void obtainItem(Equipment e){ inventory.add(e); }
+    public void obtainItem(Equipment e){
+
+        if(e.getClass() == Boots.class){
+            bootsInv.add((Boots)e);
+            Collections.sort(bootsInv);
+        } else if(e.getClass() == Chestpiece.class){
+            chestInv.add((Chestpiece)e);
+            Collections.sort(chestInv);
+        } else if(e.getClass() == Sword.class){
+            swordInv.add((Sword)e);
+            Collections.sort(swordInv);
+        } else if(e.getClass() == Pants.class){
+            pantsInv.add((Pants)e);
+            Collections.sort(pantsInv);
+        }
+
+    }
+
+    public ArrayList<Boots> getBootsInv(){
+        return bootsInv;
+    }
+
+    public ArrayList<Pants> getPantsInv(){
+        return pantsInv;
+    }
+
+    public ArrayList<Chestpiece> getChestInv(){
+        return chestInv;
+    }
+
+    public ArrayList<Sword> getSwordInv(){
+        return swordInv;
+    }
+
+
 
 }

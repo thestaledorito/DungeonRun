@@ -1,14 +1,14 @@
 package com.example.dungeonrun;
 
-public class Chestpiece extends Equipment{
+public class Sword extends Equipment {
     private int stat;
     private String name;
     private int quality;
     private int bonus;
 
-    public Chestpiece(int q,int b){
+    public Sword(int q,int b){
 
-        name = "Wooden Platebody";
+        name = "Wooden Sword";
         quality = q;
         stat = ((quality-1)*5)+b;
         bonus = b;
@@ -26,8 +26,8 @@ public class Chestpiece extends Equipment{
         return quality;
     }
 
-    @Override
     public int compareTo(Equipment o) {
         return this.getStat() - o.getStat();
     }
+
 }
