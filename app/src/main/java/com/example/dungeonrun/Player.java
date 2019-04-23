@@ -1,6 +1,9 @@
 package com.example.dungeonrun;
 
+import android.media.audiofx.DynamicsProcessing;
+
 import java.io.Serializable;
+import java.util.ArrayList;
 
 public class Player implements Serializable {
     private int playerLVL;
@@ -12,6 +15,7 @@ public class Player implements Serializable {
     private boolean dead;
     private int playerVit;
     private int skillPoints;
+    private ArrayList<Equipment> inventory;
 
     Player(int l, int atk, int xp, double hp){
         playerLVL = l;
@@ -19,6 +23,7 @@ public class Player implements Serializable {
         playerXP = xp;
         maxHP = hp;
         currentHP = hp;
+        inventory = new ArrayList<>();
     }
     public void gainLevel(){
         playerLVL++;
@@ -84,4 +89,8 @@ public class Player implements Serializable {
     public int getSkillPoints(){
         return skillPoints;
     }
+
+    public void obtainItem(Equipment e){ inventory.add(e); }
+
+
 }
