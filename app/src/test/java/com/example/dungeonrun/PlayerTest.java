@@ -28,10 +28,15 @@ public class PlayerTest {
         p.obtainItem(f);
 
         System.out.println(p.getBootsInv());
-        System.out.println(p.getPantsInv());
-        System.out.println(p.getChestInv());
-        System.out.println(p.getSwordInv());
-
+        System.out.println(p.getDex());
+        p.equipItem(b);
+        System.out.println(p.getDex());
+        System.out.println(p.getEquippedBoots());
+        System.out.println(p.getBootsInv());
+        p.unequipItem(b);
+        System.out.println(p.getDex());
+        System.out.println(p.getEquippedBoots());
+        System.out.println(p.getBootsInv());
     }
 
 }

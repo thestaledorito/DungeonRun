@@ -13,7 +13,7 @@ public class HealRoom extends Room {
 	}
 
 	public void roomFunction(Player player) {
-		player.healPlayer((player.getVit() * dungeonLevel));
+		player.healPlayer(2+((player.getVit() * dungeonLevel)));
 		if (randomNum.nextInt(2) == 1) {
 			this.finished = true;
 		}

@@ -21,6 +21,10 @@ public class Player implements Serializable {
     private ArrayList<Chestpiece> chestInv;
     private ArrayList<Pants> pantsInv;
     private ArrayList<Sword> swordInv;
+    private Boots equippedBoots;
+    private Chestpiece equippedChest;
+    private Pants equippedPants;
+    private Sword equippedSword;
 
 
     Player(int l, int atk, int xp, double hp){
@@ -110,6 +114,46 @@ public class Player implements Serializable {
 
     public void gainHP(){maxHP+=5;}
 
+    public void gainATK(int n){playerATK+=n;}
+
+    public void gainDEX(int n){playerDex+=n;}
+
+    public void gainVIT(int n){playerVit+=n;}
+
+    public void gainHP(int n){maxHP+=n;}
+
+    public void removeATK(int n){
+        if(playerATK-n > 0) {
+            playerATK -= n;
+        } else {
+            playerATK = 0;
+        }
+    }
+
+    public void removeDEX(int n){
+        if(playerDex-n > 0) {
+            playerDex -= n;
+        } else {
+            playerDex = 0;
+        }
+    }
+
+    public void removeVIT(int n){
+        if(playerVit-n > 0) {
+            playerVit -= n;
+        } else {
+            playerVit = 0;
+        }
+    }
+
+    public void removeHP(int n){
+        if(maxHP-n > 0) {
+            maxHP -= n;
+        } else {
+            maxHP = 0;
+        }
+    }
+
     public void obtainItem(Equipment e){
 
         if(e.getClass() == Boots.class){
@@ -143,6 +187,106 @@ public class Player implements Serializable {
     public ArrayList<Sword> getSwordInv(){
         return swordInv;
     }
+
+    public void equipItem(Equipment e){
+        if(e.getClass() == Boots.class){
+            if(equippedBoots == null){
+                equippedBoots = (Boots) e;
+                bootsInv.remove(e);
+                gainDEX(e.getStat());
+            } else {
+                unequipItem(getEquippedBoots());
+                equippedBoots = (Boots) e;
+                bootsInv.remove(e);
+                gainDEX(e.getStat());
+            }
+
+        }else if (e.getClass() == Chestpiece.class){
+            if(equippedChest == null){
+                equippedChest = (Chestpiece) e;
+                chestInv.remove(e);
+                gainHP(e.getStat());
+            } else {
+                unequipItem(getEquippedChest());
+                equippedChest = (Chestpiece) e;
+                chestInv.remove(e);
+                gainHP(e.getStat());
+            }
+        } else if(e.getClass() == Sword.class){
+            if(equippedSword == null){
+                equippedSword = (Sword) e;
+                swordInv.remove(e);
+                gainATK(e.getStat());
+            } else {
+                unequipItem(getEquippedSword());
+                equippedSword = (Sword) e;
+                swordInv.remove(e);
+                gainATK(e.getStat());
+            }
+        } else if(e.getClass() == Pants.class){
+            if(equippedPants == null){
+                equippedPants = (Pants) e;
+                pantsInv.remove(e);
+                gainVIT(e.getStat());
+            } else {
+                unequipItem(getEquippedPants());
+                equippedPants = (Pants) e;
+                pantsInv.remove(e);
+                gainVIT(e.getStat());
+            }
+        }
+
+    }
+
+    public void unequipItem(Equipment e){
+
+        if(e.getClass() == Boots.class){
+            if(equippedBoots != null){
+                obtainItem(e);
+                equippedBoots = null;
+                removeDEX(e.getStat());
+            }
+
+        } else if(e.getClass() == Chestpiece.class){
+            if(equippedChest != null){
+                obtainItem(e);
+                equippedChest = null;
+                removeHP(e.getStat());
+            }
+        } else if(e.getClass() == Sword.class){
+            if(equippedBoots != null){
+                obtainItem(e);
+                equippedSword = null;
+                removeATK(e.getStat());
+            }
+        } else if(e.getClass() == Pants.class){
+            if(equippedBoots != null){
+                obtainItem(e);
+                equippedPants = null;
+                removeVIT(e.getStat());
+            }
+        }
+
+    }
+
+    public Boots getEquippedBoots(){
+        return equippedBoots;
+    }
+
+    public Sword getEquippedSword(){
+        return equippedSword;
+    }
+
+    public Pants getEquippedPants(){
+        return equippedPants;
+    }
+
+    public Chestpiece getEquippedChest(){
+        return equippedChest;
+    }
+
+
+
 
 
 
