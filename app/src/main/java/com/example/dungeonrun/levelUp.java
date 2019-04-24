@@ -1,16 +1,20 @@
 package com.example.dungeonrun;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 
 public class levelUp  extends AppCompatActivity {
 
     Player player;
+
 
     protected void onCreate(Bundle savedInstanceState) {
         player = setPlayer();
@@ -21,8 +25,10 @@ public class levelUp  extends AppCompatActivity {
         Button VIT = findViewById(R.id.vitUp);
         Button HP = findViewById(R.id.healthUp);
         Button goBack = findViewById(R.id.goBack);
+
         super.onCreate(savedInstanceState);
         display();
+
         ATK.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -82,6 +88,7 @@ public class levelUp  extends AppCompatActivity {
 
     }
 
+
     public Player setPlayer()
     {
 
@@ -110,11 +117,15 @@ public class levelUp  extends AppCompatActivity {
 
 
     public void display() {
-        ((TextView) findViewById(R.id.healthText)).setText(Double.toString(player.getHP()));
+        ((TextView) findViewById(R.id.healthText)).setText(Double.toString(player.getMaxHP()));
         ((TextView) findViewById(R.id.atkText)).setText(Double.toString(player.getATK()));
         ((TextView) findViewById(R.id.dexText)).setText(Double.toString(player.getDex()));
         ((TextView) findViewById(R.id.vitText)).setText(Double.toString(player.getVit()));
         ((TextView) findViewById(R.id.skillPoints)).setText(Double.toString(player.getSkillPoints()));
+
+
+
+
 
 
 

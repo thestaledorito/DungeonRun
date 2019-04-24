@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -19,6 +20,9 @@ public class MainActivity extends AppCompatActivity {
     int dungeonLevel = 1;
 
     Room currentRoom = new startingRoom(dungeonLevel);
+    ProgressBar playerHealth = null;
+
+    ProgressBar monsterHealth = null;
 
 
     @Override
@@ -26,6 +30,8 @@ public class MainActivity extends AppCompatActivity {
         player =   setPlayer();
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        playerHealth = findViewById(R.id.playerHealth);
+        monsterHealth = findViewById(R.id.monsterHealth);
         display();
         Button step = findViewById(R.id.step);
         Button levelUp = findViewById(R.id.levelUp);
@@ -76,8 +82,10 @@ public class MainActivity extends AppCompatActivity {
 
     public void checkPlayer() {
         if (player.isDead()) {
+
             if (dungeonLevel == 1) {
-                return;
+
+
             } else {
                 dungeonLevel--;
             }
@@ -88,6 +96,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void display() {
+
         ((TextView) findViewById(R.id.currentHealth)).setText(Double.toString(player.getHP()));
         ((TextView) findViewById(R.id.currentAttack)).setText(Double.toString(player.getATK()));
         ((TextView) findViewById(R.id.expBar)).setText(Double.toString(player.getXP()));
@@ -96,10 +105,16 @@ public class MainActivity extends AppCompatActivity {
 
         if (currentRoom.getRoomType().equals("Monster")) {
             ((TextView) findViewById(R.id.MonsterHealth)).setText(Double.toString(((MonsterRoom) currentRoom).getRoomMonster().getHP()));
-            ((TextView) findViewById(R.id.Monster)).setText("Monster Health");
+
+            monsterHealth.setVisibility(View.VISIBLE);
+            monsterHealth.setScaleY(3f);
+            monsterHealth.setMax((int)((MonsterRoom) currentRoom).getRoomMonster().getMaxHP());
+            monsterHealth.setProgress((int)((MonsterRoom) currentRoom).getRoomMonster().getHP());
+
         } else {
             ((TextView) findViewById(R.id.MonsterHealth)).setText("");
-            ((TextView) findViewById(R.id.Monster)).setText("");
+
+            monsterHealth.setVisibility(View.GONE);
         }
         ((TextView) findViewById(R.id.dungeonLevel)).setText(Integer.toString(dungeonLevel));
         //Change this to level up points later on
@@ -110,6 +125,11 @@ public class MainActivity extends AppCompatActivity {
         {
             findViewById(R.id.levelUp).setBackgroundColor(getResources().getColor(R.color.colorRed));
         }
+        playerHealth.setScaleY(3f);
+        playerHealth.setMax((int)player.getMaxHP());
+        playerHealth.setProgress((int)player.getHP());
+
+
 
 
     }
