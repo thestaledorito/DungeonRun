@@ -4,12 +4,14 @@ public class Monster{
 	private double monsterATK;
 	private double monsterValue;
 	private boolean dead;
+	private double MaxHP;
 	
 Monster(double h, double atk, double val){
 	monsterHP = h;
 	monsterATK = atk;
 	monsterValue = val;
 	dead = false;
+	MaxHP = h;
 }
 
 public void takeDMG(double dmg){
@@ -45,5 +47,7 @@ public double getValue(){
 public double getHP(){
 	return monsterHP;
 }
+
+public double getMaxHP(){return MaxHP;}
 }
 
