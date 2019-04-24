@@ -41,9 +41,9 @@ public class Player implements Serializable {
     }
 
     public void gainXP(double xp){
-        if((playerXP+xp)>=1000){
+        if((playerXP+xp)>=100){
             gainLevel();
-            playerXP = (playerXP+xp)-1000;
+            playerXP = (playerXP+xp)-100;
         } else {
             playerXP += xp;
         }

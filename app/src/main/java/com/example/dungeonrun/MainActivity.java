@@ -99,20 +99,21 @@ public class MainActivity extends AppCompatActivity {
 
         ((TextView) findViewById(R.id.currentHealth)).setText(Double.toString(player.getHP()));
         ((TextView) findViewById(R.id.currentAttack)).setText(Double.toString(player.getATK()));
-        ((TextView) findViewById(R.id.expBar)).setText(Double.toString(player.getXP()));
+        ((TextView) findViewById(R.id.expBar)).setText(Double.toString(player.getXP())+"/100");
         ((TextView) findViewById(R.id.currentLevel)).setText(Double.toString(player.getLVL()));
         ((TextView) findViewById(R.id.room)).setText(currentRoom.getRoomType());
 
         if (currentRoom.getRoomType().equals("Monster")) {
-            ((TextView) findViewById(R.id.MonsterHealth)).setText(Double.toString(((MonsterRoom) currentRoom).getRoomMonster().getHP()));
+
 
             monsterHealth.setVisibility(View.VISIBLE);
             monsterHealth.setScaleY(3f);
             monsterHealth.setMax((int)((MonsterRoom) currentRoom).getRoomMonster().getMaxHP());
             monsterHealth.setProgress((int)((MonsterRoom) currentRoom).getRoomMonster().getHP());
+            monsterHealth.setProgressDrawable(getResources().getDrawable(R.drawable.greenprogress));
 
         } else {
-            ((TextView) findViewById(R.id.MonsterHealth)).setText("");
+
 
             monsterHealth.setVisibility(View.GONE);
         }
@@ -125,9 +126,11 @@ public class MainActivity extends AppCompatActivity {
         {
             findViewById(R.id.levelUp).setBackgroundColor(getResources().getColor(R.color.colorRed));
         }
-        playerHealth.setScaleY(3f);
+        playerHealth.setScaleY(.5f);
         playerHealth.setMax((int)player.getMaxHP());
         playerHealth.setProgress((int)player.getHP());
+        playerHealth.setProgressDrawable(getResources().getDrawable(R.drawable.greenprogress));
+        playerHealth.setVisibility(View.VISIBLE);
 
 
 
