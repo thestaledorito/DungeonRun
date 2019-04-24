@@ -7,6 +7,7 @@ public class TrapRoom extends Room{
 
 	TrapRoom (int dungeonLevel){
 		this.finished = false;
+		this.dungeonLevel = dungeonLevel;
 	}
 	
 	public void roomFunction(Player player) {
