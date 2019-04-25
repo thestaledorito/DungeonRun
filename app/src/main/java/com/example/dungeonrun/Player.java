@@ -27,7 +27,7 @@ public class Player implements Serializable {
     private Sword equippedSword;
 
 
-    Player(int l, int atk, int xp, double hp){
+    Player(int l, int atk, int xp, double hp,int dex,int vit){
         playerLVL = l;
         playerATK = atk;
         playerXP = xp;
@@ -37,6 +37,8 @@ public class Player implements Serializable {
         chestInv = new ArrayList<>();
         pantsInv = new ArrayList<>();
         swordInv = new ArrayList<>();
+        playerVit = vit;
+        playerDex = dex;
     }
 
     public void gainLevel(){
