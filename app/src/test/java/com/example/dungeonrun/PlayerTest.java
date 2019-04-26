@@ -12,7 +12,7 @@ import static org.junit.Assert.*;
 public class PlayerTest {
     @Test
     public void inventory_works() {
-        Player p = new Player(1,1,10,10);
+        Player p = new Player(1,1,10,10,1,1);
         Chestpiece a = new Chestpiece(4,2);
         Boots b = new Boots(1,3);
         Chestpiece c = new Chestpiece(5,2);
