@@ -13,7 +13,8 @@ public class PlayerTest {
     @Test
     public void inventory_works() {
         Player p = new Player(1,1,10,10,1,1);
-        Chestpiece a = new Chestpiece(4,2);
+
+        /*Chestpiece a = new Chestpiece(4,2);
         Boots b = new Boots(1,3);
         Chestpiece c = new Chestpiece(5,2);
         Sword d = new Sword(2,3);
@@ -27,6 +28,13 @@ public class PlayerTest {
         p.obtainItem(e);
         p.obtainItem(f);
 
+        System.out.println(a.getName());
+        System.out.println(b.getName());
+        System.out.println(c.getName());
+        System.out.println(d.getName());
+        System.out.println(e.getName());
+        System.out.println(f.getName());
+
         System.out.println(p.getBootsInv());
         System.out.println(p.getDex());
         p.equipItem(b);
@@ -37,6 +45,9 @@ public class PlayerTest {
         System.out.println(p.getDex());
         System.out.println(p.getEquippedBoots());
         System.out.println(p.getBootsInv());
+        */
+
+
     }
 
 }
