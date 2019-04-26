@@ -18,7 +18,7 @@ public class Inventory extends AppCompatActivity  {
     {
 
 
-        Player player1 = new Player(1, 1, 0, 100);
+        Player player1 = new Player(1, 1, 0, 100,1,1);
         Intent intent = getIntent();
         if(intent != null) {
             Bundle extras = getIntent().getExtras();
