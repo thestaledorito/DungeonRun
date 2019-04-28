@@ -1,6 +1,8 @@
 package com.example.dungeonrun;
 
-public abstract class Equipment implements Comparable<Equipment> {
+import java.io.Serializable;
+
+public abstract class Equipment implements Comparable<Equipment> , Serializable {
 
     private int stat;
     private String name;

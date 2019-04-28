@@ -35,6 +35,8 @@ public class MainActivity extends AppCompatActivity {
         display();
         Button step = findViewById(R.id.step);
         Button levelUp = findViewById(R.id.levelUp);
+        Button Inventory = findViewById(R.id.inventory);
+        generateEquipment();
         step.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -49,6 +51,16 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent myIntent = new Intent(MainActivity.this, levelUp.class);
+                Bundle bundle = new Bundle();
+                bundle.putSerializable("P",player);
+                myIntent.putExtras(bundle);
+                startActivity(myIntent);
+            }
+        });
+        Inventory.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent myIntent = new Intent(MainActivity.this, Inventory.class);
                 Bundle bundle = new Bundle();
                 bundle.putSerializable("P",player);
                 myIntent.putExtras(bundle);
@@ -94,6 +106,42 @@ public class MainActivity extends AppCompatActivity {
             player.isAlive();
         }
     }
+    public void generateEquipment(){
+
+        Boots a = new Boots(4,2);
+        Boots b = new Boots(1,3);
+        Boots c = new Boots(5,1);
+        Pants d = new Pants(2,3);
+        Pants e = new Pants(2,2);
+        Pants f = new Pants(1,1);
+
+
+        player.obtainItem(a);
+        player.obtainItem(b);
+        player.obtainItem(c);
+        player.obtainItem(d);
+        player.obtainItem(e);
+        player.obtainItem(f);
+        player.obtainItem(a);
+        player.obtainItem(b);
+        player.obtainItem(c);
+        player.obtainItem(d);
+        player.obtainItem(e);
+        player.obtainItem(f);
+        player.obtainItem(a);
+        player.obtainItem(b);
+        player.obtainItem(c);
+        player.obtainItem(d);
+        player.obtainItem(e);
+        player.obtainItem(f);
+        player.obtainItem(a);
+        player.obtainItem(b);
+        player.obtainItem(c);
+        player.obtainItem(d);
+        player.obtainItem(e);
+        player.obtainItem(f);
+    }
+
 
     public void display() {
 
