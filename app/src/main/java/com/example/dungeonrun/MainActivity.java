@@ -18,6 +18,7 @@ public class MainActivity extends AppCompatActivity {
     Player player;
 
     int dungeonLevel = 1;
+    int roomsCleared = 0;
 
     Room currentRoom = new startingRoom(dungeonLevel);
     ProgressBar playerHealth = null;
@@ -74,20 +75,29 @@ public class MainActivity extends AppCompatActivity {
     public Room checkRoom(Room currentRoom) {
         Random randomGen = new Random();
         if (currentRoom.finished) {
-            //Creating a random room besides a starting room
-            int type = randomGen.nextInt(3) + 1;
-            switch (type) {
-                case 1:
-                    currentRoom = new MonsterRoom(dungeonLevel);
-                    break;
-                case 2:
-                    currentRoom = new HealRoom(dungeonLevel);
-                    break;
-                case 3:
-                    currentRoom = new TrapRoom(dungeonLevel);
-                    break;
-            }
+            roomsCleared++;
+            if (roomsCleared >= 45+(5*dungeonLevel)) {
+                dungeonLevel++;
+                currentRoom = new startingRoom(dungeonLevel);
+                player.healPlayer(player.getMaxHP());
+                player.isAlive();
+                roomsCleared = 0;
+            } else {
+                //Creating a random room besides a starting room
+                int type = randomGen.nextInt(3) + 1;
+                switch (type) {
+                    case 1:
+                        currentRoom = new MonsterRoom(dungeonLevel);
+                        break;
+                    case 2:
+                        currentRoom = new HealRoom(dungeonLevel);
+                        break;
+                    case 3:
+                        currentRoom = new TrapRoom(dungeonLevel);
+                        break;
+                }
 
+            }
         }
         return currentRoom;
     }
@@ -102,6 +112,7 @@ public class MainActivity extends AppCompatActivity {
                 dungeonLevel--;
             }
             currentRoom = new startingRoom(dungeonLevel);
+            roomsCleared =0;
             player.healPlayer(player.getMaxHP());
             player.isAlive();
         }
