@@ -161,15 +161,19 @@ public class Player implements Serializable {
         if(e.getClass() == Boots.class){
             bootsInv.add((Boots)e);
             Collections.sort(bootsInv);
+            Collections.reverse(bootsInv);
         } else if(e.getClass() == Chestpiece.class){
             chestInv.add((Chestpiece)e);
             Collections.sort(chestInv);
+            Collections.reverse(chestInv);
         } else if(e.getClass() == Sword.class){
             swordInv.add((Sword)e);
             Collections.sort(swordInv);
+            Collections.reverse(swordInv);
         } else if(e.getClass() == Pants.class){
             pantsInv.add((Pants)e);
             Collections.sort(pantsInv);
+            Collections.reverse(pantsInv);
         }
 
     }
@@ -256,13 +260,13 @@ public class Player implements Serializable {
                 removeHP(e.getStat());
             }
         } else if(e.getClass() == Sword.class){
-            if(equippedBoots != null){
+            if(equippedSword != null){
                 obtainItem(e);
                 equippedSword = null;
                 removeATK(e.getStat());
             }
         } else if(e.getClass() == Pants.class){
-            if(equippedBoots != null){
+            if(equippedPants != null){
                 obtainItem(e);
                 equippedPants = null;
                 removeVIT(e.getStat());
