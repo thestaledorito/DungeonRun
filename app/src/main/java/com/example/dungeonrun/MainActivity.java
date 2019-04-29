@@ -1,7 +1,13 @@
 package com.example.dungeonrun;
 
+
+import android.content.Context;
 import android.content.Intent;
 
+import android.hardware.Sensor;
+import android.hardware.SensorEvent;
+import android.hardware.SensorEventListener;
+import android.hardware.SensorManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -12,13 +18,15 @@ import android.widget.Toast;
 
 import java.util.*;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements SensorEventListener {
 
 
     Player player;
 
     int dungeonLevel = 1;
     int roomsCleared = 0;
+    private SensorManager sensorManager;
+    private Sensor stepDetector;
 
     Room currentRoom = new startingRoom(dungeonLevel);
     ProgressBar playerHealth = null;
@@ -30,6 +38,11 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         player =   setPlayer();
         super.onCreate(savedInstanceState);
+
+        sensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
+        stepDetector = sensorManager.getDefaultSensor(Sensor.TYPE_STEP_DETECTOR);
+        sensorManager.registerListener(this,sensorManager.getDefaultSensor(Sensor.TYPE_STEP_DETECTOR),sensorManager.SENSOR_DELAY_NORMAL);
+
         setContentView(R.layout.activity_main);
         playerHealth = findViewById(R.id.playerHealth);
         monsterHealth = findViewById(R.id.monsterHealth);
@@ -58,6 +71,17 @@ public class MainActivity extends AppCompatActivity {
         });
 
 
+    }
+
+    public void onAccuracyChanged(Sensor s, int i) {
+
+    }
+
+    public void onSensorChanged(SensorEvent event) {
+        currentRoom = checkRoom(currentRoom);
+        currentRoom.roomFunction(player);
+        checkPlayer();
+        display();
     }
 
     public Room checkRoom(Room currentRoom) {

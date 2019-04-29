@@ -10,4 +10,6 @@ public abstract class Room {
 	public abstract void roomFunction(Player player);
 	
 	public abstract String getRoomType();
+
+
 }
